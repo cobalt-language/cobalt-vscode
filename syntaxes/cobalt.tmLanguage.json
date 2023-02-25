@@ -2,28 +2,143 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Cobalt",
 	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		}
+		{"include": "#keywords"},
+		{"include": "#literals"},
+		{"include": "#comments"},
+		{"include": "#macros"},
+		{"include": "#variables"}
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.cobalt",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.cobalt",
-			"begin": "\"",
-			"end": "\"",
+		"types": {
 			"patterns": [
 				{
-					"name": "constant.character.escape.cobalt",
-					"match": "\\\\."
+					"name": "entity.name.type.cobalt",
+					"match": "\\b(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*\\[&*\\^]|\\s+(mut|const)\\s*[&*])?"
+				}
+			]
+		},
+		"literals": {
+			"patterns": [
+				{
+					"name": "constant.other.bool.cobalt",
+					"match": "\\b(true|false)\\b"
+				},
+				{
+					"name": "constant.numeric.int.cobalt",
+					"match": "\\b\\d+\\b"
+				},
+				{
+					"name": "constant.numeric.float.cobalt",
+					"match": "\\b(\\d+\\.\\d*|\\.\\d+)\\b"
+				},
+				{
+					"name": "constant.character",
+					"match": "'[^\\\\']'|'\\\\[^xuU]'|'\\\\x[0-9a-fA-F]{2}'|'\\\\u[0-9a-fA-F]{4}'|'\\\\U[0-9a-fA-F]{8}'"
+				},
+				{
+					"name": "string.quoted.cobalt",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.cobalt",
+							"match": "\\\\([^xuU]|x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8})"
+						}
+					]
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.cobalt",
+					"match": "\\b(if|while)\\b"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.number-sign.cobalt",
+					"match": "#([^=].*)?$"
+				},
+				{
+					"name": "comment.block.cobalt",
+					"begin": "#=",
+					"end": "=#",
+					"beginCaptures": {
+						"0": {"name": "comment.block.open.cobalt"}
+					},
+					"endCaptures": {
+						"0": {"name": "comment.block.close.cobalt"}
+					}
+				}
+			]
+		},
+		"macros": {
+			"patterns": [
+				{
+					"name": "entity.name.function.macro.func.cobalt",
+					"begin": "@[\\w_$]+\\s*\\(",
+					"end": "\\)"
+				},
+				{
+					"name": "entity.name.function.macro.var.cobalt",
+					"match": "@[\\w_$]+(?!\\w*\\s\\()"
+				}
+			]
+		},
+		"parameters": {
+			"patterns": [
+				{
+					"name": "meta.definition.function-parameters.cobalt",
+					"match": "([\\w_$]+)\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)?\\s*((,\\s*([\\w_$]+)\\s*:\\s*\\b(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)*)",
+					"captures": {
+						"1": {"name": "variable.parameter.cobalt"},
+						"2": {"patterns": [{"include": "#types"}]},
+						"7": {"patterns": [{"include": "#param-impl"}]}
+					}
+				}
+			]
+		},
+		"param-impl": {
+			"patterns": [
+				{
+					"name": "meta.definition.function-parameters.cobalt",
+					"match": ",\\s*([\\w_$]+)\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)?\\s*((,\\s*([\\w_$]+)\\s*:\\s*\\b(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)*)",
+					"captures": {
+						"1": {"name": "variable.parameter.cobalt"},
+						"2": {"patterns": [{"include": "#types"}]},
+						"7": {"patterns": [{"include": "#param-impl"}]}
+					}
+				}
+			]
+		},
+		"variables": {
+			"patterns": [
+				{
+					"name": "meta.definition.variable.cobalt",
+					"match": "\\b(let|mut|const)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*:\\s*(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)?",
+					"captures": {
+						"1": {"name": "keyword.other.cobalt"},
+						"2": {"name": "variable.other.cobalt"},
+						"5": {"patterns": [{"include": "#types"}]}
+					}
+				},
+				{
+					"name": "meta.definition.function.cobalt",
+					"match": "\\b(fn)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)\\s*\\((\\s*([\\w_$]+)\\s*:\\s*(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*\\s*((,\\s*([\\w_$]+)\\s*:\\s*(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)*)\\s*)?\\)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))?",
+					"captures": {
+						"1": {"name": "keyword.other.cobalt"},
+						"2": {"name": "entity.name.function.cobalt"},
+						"4": {"patterns": [{"include": "#parameters"}]},
+						"18": {"patterns": [{"include": "#types"}]}
+					}
+				},
+				{
+					"name": "NOHL",
+					"disabled": 1,
+					"match": "\\b\\.?[\\w_$]+(\\.[\\w_$]+)*\\b"
 				}
 			]
 		}
