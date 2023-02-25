@@ -3,18 +3,27 @@
   "displayName": "Cobalt",
   "description": "Language support for the Cobalt programming language",
   "version": "0.0.1",
+  "icon": "images/cobalt.png",
   "engines": {
     "vscode": "^1.75.0"
   },
   "categories": [
     "Programming Languages"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matt-cornell/cobalt-vscode"
+  },
   "contributes": {
     "languages": [{
       "id": "cobalt",
       "aliases": ["Cobalt", "cobalt"],
       "extensions": [".co"],
-      "configuration": "./language-configuration.json"
+      "configuration": "./language-configuration.json",
+      "icon": {
+        "light": "icons/cobalt.png",
+        "dark": "icons/cobalt.png"
+      }
     }],
     "grammars": [{
       "language": "cobalt",
