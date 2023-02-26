@@ -13,7 +13,7 @@
 			"patterns": [
 				{
 					"name": "entity.name.type.cobalt",
-					"match": "\\b(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*\\[&*\\^]|\\s+(mut|const)\\s*[&*])?"
+					"match": "(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*"
 				}
 			]
 		},
@@ -92,7 +92,7 @@
 			"patterns": [
 				{
 					"name": "meta.definition.function-parameters.cobalt",
-					"match": "([\\w_$]+)\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)?\\s*((,\\s*([\\w_$]+)\\s*:\\s*\\b(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)*)",
+					"match": "([\\w_$]+)\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)\\s*((,\\s*([\\w_$]+)\\s*:\\s*(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)*)",
 					"captures": {
 						"1": {"name": "variable.parameter.cobalt"},
 						"2": {"patterns": [{"include": "#types"}]},
@@ -105,7 +105,7 @@
 			"patterns": [
 				{
 					"name": "meta.definition.function-parameters.cobalt",
-					"match": ",\\s*([\\w_$]+)\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)?\\s*((,\\s*([\\w_$]+)\\s*:\\s*\\b(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)*)",
+					"match": ",\\s*([\\w_$]+)\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)\\s*((,\\s*([\\w_$]+)\\s*:\\s*(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)*)",
 					"captures": {
 						"1": {"name": "variable.parameter.cobalt"},
 						"2": {"patterns": [{"include": "#types"}]},
@@ -118,7 +118,7 @@
 			"patterns": [
 				{
 					"name": "meta.definition.variable.cobalt",
-					"match": "\\b(let|mut|const)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*:\\s*(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)?",
+					"match": "\\b(let|mut|const)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))?",
 					"captures": {
 						"1": {"name": "keyword.other.cobalt"},
 						"2": {"name": "variable.other.cobalt"},
@@ -127,12 +127,12 @@
 				},
 				{
 					"name": "meta.definition.function.cobalt",
-					"match": "\\b(fn)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)\\s*\\((\\s*([\\w_$]+)\\s*:\\s*(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*\\s*((,\\s*([\\w_$]+)\\s*:\\s*(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)*)\\s*)?\\)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))?",
+					"match": "\\b(fn)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)\\s*\\(((\\s*([\\w_$]+))(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))\\s*(,\\s*([\\w_$]+)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))\\s*)*)?\\)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))?",
 					"captures": {
 						"1": {"name": "keyword.other.cobalt"},
 						"2": {"name": "entity.name.function.cobalt"},
 						"4": {"patterns": [{"include": "#parameters"}]},
-						"18": {"patterns": [{"include": "#types"}]}
+						"22": {"patterns": [{"include": "#types"}]}
 					}
 				},
 				{
