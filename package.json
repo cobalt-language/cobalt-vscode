@@ -3,7 +3,7 @@
   "displayName": "Cobalt",
   "description": "Language support for the Cobalt programming language",
   "version": "0.0.1",
-  "icon": "images/cobalt.png",
+  "icon": "icons/cobalt-icon.png",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -21,8 +21,8 @@
       "extensions": [".co"],
       "configuration": "./language-configuration.json",
       "icon": {
-        "light": "icons/cobalt.png",
-        "dark": "icons/cobalt.png"
+        "light": "icons/cobalt-file.png",
+        "dark": "icons/cobalt-file.png"
       }
     }],
     "grammars": [{
