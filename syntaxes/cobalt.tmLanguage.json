@@ -78,12 +78,12 @@
 		"macros": {
 			"patterns": [
 				{
-					"name": "entity.name.function.macro.func.cobalt",
+					"name": "keyword.other.macro.func.cobalt",
 					"begin": "@[\\w_$]+\\s*\\(",
 					"end": "\\)"
 				},
 				{
-					"name": "entity.name.function.macro.var.cobalt",
+					"name": "keyword.other.macro.var.cobalt",
 					"match": "@[\\w_$]+(?!\\w*\\s\\()"
 				}
 			]
