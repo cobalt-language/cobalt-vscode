@@ -2,11 +2,11 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Cobalt",
 	"patterns": [
-		{"include": "#keywords"},
 		{"include": "#literals"},
 		{"include": "#comments"},
 		{"include": "#macros"},
-		{"include": "#variables"}
+		{"include": "#variables"},
+		{"include": "#keywords"}
 	],
 	"repository": {
 		"types": {
@@ -53,6 +53,14 @@
 				{
 					"name": "keyword.control.cobalt",
 					"match": "\\b(if|while)\\b"
+				},
+				{
+					"name": "keyword.other.cobalt",
+					"match": "\\b(let|fn|module)\\b|(mut|const)(?!\\s*[&*])"
+				},
+				{
+					"name": "entity.name.type.cobalt",
+					"match": "\\b(bool|null|isize|usize|f16|f32|f64|f128|[iu]\\d+)\\b"
 				}
 			]
 		},
@@ -136,9 +144,39 @@
 					}
 				},
 				{
-					"name": "NOHL",
-					"disabled": 1,
-					"match": "\\b\\.?[\\w_$]+(\\.[\\w_$]+)*\\b"
+					"name": "meta.definition.variable.fallback.cobalt",
+					"match": "\\b(let|mut|const)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)",
+					"captures": {
+						"1": {"name": "keyword.other.cobalt"},
+						"2": {"name": "variable.other.cobalt"}
+					}
+				},
+				{
+					"name": "meta.definition.function.fallback.cobalt",
+					"match": "\\b(fn)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)",
+					"captures": {
+						"1": {"name": "keyword.other.cobalt"},
+						"2": {"name": "entity.name.function.cobalt"}
+					}
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.cobalt",
+					"match": "[+-*/%<>^=]"
+				},
+				{
+					"name": "keyword.operator.cast.cobalt",
+					"match": "\\b:\\??\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*)",
+					"captures": {
+						"1": {"patterns": [{"include": "#types"}]}
+					}
+				},
+				{
+					"name": "keyword.operator.cast.fallback.cobalt",
+					"match": "\\b:\\??"
 				}
 			]
 		}
