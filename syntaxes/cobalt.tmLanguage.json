@@ -56,7 +56,7 @@
 				},
 				{
 					"name": "keyword.other.cobalt",
-					"match": "\\b(let|fn|module)\\b|(mut|const)(?!\\s*[&*])"
+					"match": "\\b(let|fn|module|import|type|cr)\\b|(mut|const)(?!\\s*[&*])"
 				},
 				{
 					"name": "entity.name.type.cobalt",
@@ -126,7 +126,7 @@
 			"patterns": [
 				{
 					"name": "meta.definition.variable.cobalt",
-					"match": "\\b(let|mut|const)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))?",
+					"match": "\\b(let|mut|const|type)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))?",
 					"captures": {
 						"1": {"name": "keyword.other.cobalt"},
 						"2": {"name": "variable.other.cobalt"},
@@ -135,7 +135,7 @@
 				},
 				{
 					"name": "meta.definition.function.cobalt",
-					"match": "\\b(fn)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)\\s*\\(((\\s*([\\w_$]+))(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))\\s*(,\\s*([\\w_$]+)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))\\s*)*)?\\)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))?",
+					"match": "\\b(fn|cr)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)\\s*\\(((\\s*([\\w_$]+))(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))\\s*(,\\s*([\\w_$]+)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))\\s*)*)?\\)(\\s*:\\s*((\\.?[\\w_$]+(\\.[\\w_$]+)*)(\\s*[&*\\^]|\\s+(mut|const)\\s*[&*]|\\s*\\[.*?])*))?",
 					"captures": {
 						"1": {"name": "keyword.other.cobalt"},
 						"2": {"name": "entity.name.function.cobalt"},
@@ -145,7 +145,7 @@
 				},
 				{
 					"name": "meta.definition.variable.fallback.cobalt",
-					"match": "\\b(let|mut|const)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)",
+					"match": "\\b(let|mut|const|type)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)",
 					"captures": {
 						"1": {"name": "keyword.other.cobalt"},
 						"2": {"name": "variable.other.cobalt"}
@@ -153,7 +153,7 @@
 				},
 				{
 					"name": "meta.definition.function.fallback.cobalt",
-					"match": "\\b(fn)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)",
+					"match": "\\b(fn|cr)\\s+(\\.?[\\w_$]+(\\.[\\w_$]+)*)",
 					"captures": {
 						"1": {"name": "keyword.other.cobalt"},
 						"2": {"name": "entity.name.function.cobalt"}
