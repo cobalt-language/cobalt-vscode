@@ -56,7 +56,7 @@
 				},
 				{
 					"name": "keyword.other.cobalt",
-					"match": "\\b(let|fn|module|import|type|cr)\\b|(mut|const)(?!\\s*[&*])"
+					"match": "\\b((let|fn|module|import|type|cr)|(mut|const)(?!\\s*[&*]))\\b"
 				},
 				{
 					"name": "entity.name.type.cobalt",
